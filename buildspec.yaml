@@ -12,7 +12,8 @@ phases:
       - echo Installing Amazon Inspector SBOM Generator...
       - curl -Lo inspector-sbomgen.zip https://amazon-inspector-sbomgen.s3.amazonaws.com/latest/linux/amd64/inspector-sbomgen.zip
       - unzip inspector-sbomgen.zip
-      - chmod +x inspector-sbomgen
+      - chmod +x inspector-sbomgen-1.5.5/linux/amd64/inspector-sbomgen
+      - mv inspector-sbomgen-1.5.5/linux/amd64/inspector-sbomgen .
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
