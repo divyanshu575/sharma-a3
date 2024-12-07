@@ -36,7 +36,7 @@ phases:
       - echo Generating SBOM for the Docker image...
       - ./inspector-sbomgen container --image $REPOSITORY_URI:latest -o sbom.json
       - echo Scanning the SBOM with Amazon Inspector...
-      - aws inspector2 start-scan --resource-arn $REPOSITORY_URI:latest --sbom file://sbom.json
+      - aws inspector2 create-sbom-export --resource-arn $REPOSITORY_URI:latest --sbom file://sbom.json
 artifacts:
   files:
     - app.py
