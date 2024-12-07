@@ -6,8 +6,7 @@ phases:
       - echo Installing Docker...
       - yum update -y
       - yum install -y docker
-      - systemctl start docker
-      - systemctl enable docker
+      - dockerd > /dev/null 2>&1 &
       - echo Installing source dependencies...
       - pip install -r requirements.txt
       - echo Installing Amazon Inspector SBOM Generator...
