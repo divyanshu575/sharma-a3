@@ -10,8 +10,8 @@ phases:
       - echo Installing source dependencies...
       - pip install -r requirements.txt
       - echo Installing Amazon Inspector SBOM Generator...
-      - curl -Lo inspector-sbomgen https://inspector-agent.amazonaws.com/linux/inspector-sbomgen
-      - file inspector-sbomgen
+      - curl -Lo inspector-sbomgen.zip https://amazon-inspector-sbomgen.s3.amazonaws.com/latest/linux/amd64/inspector-sbomgen.zip
+      - unzip inspector-sbomgen.zip
       - chmod +x inspector-sbomgen
   pre_build:
     commands:
