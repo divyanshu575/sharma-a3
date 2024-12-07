@@ -2,9 +2,10 @@ version: 0.2
 
 phases:
   install:
-    runtime-versions:
-      docker: 18
     commands:
+      - echo Installing Docker...
+      - apt-get update
+      - apt-get install -y docker.io
       - echo Installing source dependencies...
       - pip install -r requirements.txt
       - echo Installing Amazon Inspector SBOM Generator...
