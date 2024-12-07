@@ -28,15 +28,15 @@ phases:
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
-    commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
-      - docker push $REPOSITORY_URI:latest
-      - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Generating SBOM for the Docker image...
-      - ./inspector-sbomgen container --image $REPOSITORY_URI:latest -o sbom.json
-      - echo Scanning the SBOM with Amazon Inspector...
-      - aws inspector2 create-findings-report --report-type SBOM --resource-arn $REPOSITORY_URI:latest --s3-destination bucketName=my-sbom-bucket,prefix=my-sbom-prefix
+  commands:
+    - echo Build completed on `date`
+    - echo Pushing the Docker image...
+    - docker push $REPOSITORY_URI:latest
+    - docker push $REPOSITORY_URI:$IMAGE_TAG
+    - echo Generating SBOM for the Docker image...
+    - ./inspector-sbomgen container --image $REPOSITORY_URI:latest -o sbom.json
+    - echo Scanning the SBOM with Amazon Inspector...
+    - aws inspector2 create-findings-report --report-type SBOM --resource-arn $REPOSITORY_URI:latest --report-format JSON --s3-destination bucketName=codepipeline-ca-central-1-179121243595
 artifacts:
   files:
     - app.py
