@@ -4,8 +4,8 @@ phases:
   install:
     commands:
       - echo Installing Docker...
-      - apt-get update
-      - apt-get install -y docker.io
+      - curl -fsSL https://get.docker.com -o get-docker.sh
+      - sh get-docker.sh
       - echo Installing source dependencies...
       - pip install -r requirements.txt
       - echo Installing Amazon Inspector SBOM Generator...
