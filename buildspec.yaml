@@ -4,8 +4,9 @@ phases:
   install:
     commands:
       - echo Installing Docker...
-      - curl -fsSL https://get.docker.com -o get-docker.sh
-      - sh get-docker.sh
+      - yum update -y
+      - amazon-linux-extras install docker -y
+      - service docker start
       - echo Installing source dependencies...
       - pip install -r requirements.txt
       - echo Installing Amazon Inspector SBOM Generator...
