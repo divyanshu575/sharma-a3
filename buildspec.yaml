@@ -36,7 +36,7 @@ phases:
       - echo Generating SBOM for the Docker image...
       - ./inspector-sbomgen container --image $REPOSITORY_URI:latest -o sbom.json
       - echo Scanning the SBOM with Amazon Inspector...
-      - aws inspector2 create-findings-report --filter-criteria '{"findingStatus":[{"comparison":"EQUALS","value":"ACTIVE"}]}' --report-format JSON --s3-destination '{"bucketName":"sharmalogs","keyPrefix":"sbom-reports/","kmsKeyArn":"arn:aws:kms:ca-central-1:116981763358:key/9fb14c5a-7d25-4a1c-927a-30eccbfdbfcb"}'
+      - aws inspector2 create-findings-report --filter-criteria '{"findingStatus":[{"comparison":"EQUALS","value":"ACTIVE"}]}' --report-format JSON --s3-destination '{"bucketName":"sharmalogs","keyPrefix":"sbom-reports/"}'
 artifacts:
   files:
     - app.py
