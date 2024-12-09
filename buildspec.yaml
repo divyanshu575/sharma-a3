@@ -9,11 +9,6 @@ phases:
       - dockerd > /dev/null 2>&1 &
       - echo Installing source dependencies...
       - pip install -r requirements.txt
-      - echo Installing Amazon Inspector SBOM Generator...
-      - curl -Lo inspector-sbomgen.zip https://amazon-inspector-sbomgen.s3.amazonaws.com/latest/linux/amd64/inspector-sbomgen.zip
-      - unzip inspector-sbomgen.zip
-      - chmod +x inspector-sbomgen-1.5.5/linux/amd64/inspector-sbomgen
-      - mv inspector-sbomgen-1.5.5/linux/amd64/inspector-sbomgen .
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -33,10 +28,6 @@ phases:
       - echo Pushing the Docker image...
       - docker push $REPOSITORY_URI:latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
-      - echo Generating SBOM for the Docker image...
-      - ./inspector-sbomgen container --image $REPOSITORY_URI:latest -o sbom.json
-      - echo Scanning the SBOM with Amazon Inspector...
-      - aws inspector2 create-findings-report --filter-criteria '{"findingStatus":[{"comparison":"EQUALS","value":"ACTIVE"}]}' --report-format JSON --s3-destination '{"bucketName":"sharmalogs","keyPrefix":"sbom-reports/"}'
 artifacts:
   files:
     - app.py
