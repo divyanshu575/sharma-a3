@@ -1,8 +1,8 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest', '.']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest']
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-    entrypoint: 'gcloud'
-    args: ['run', 'deploy', 'app-service', '--image', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest', '--region', 'northamerica-northeast2', '--platform', 'managed']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest']
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'gcloud'
+  args: ['run', 'deploy', 'app-service', '--image', 'northamerica-northeast2-docker.pkg.dev/direct-subject-435905-d2/app-repo/app-image:latest', '--region', 'northamerica-northeast2', '--platform', 'managed']
